@@ -58,7 +58,7 @@ pipeline {
                     sh """
                         git config user.email "rmanhduc91011@gmail.com"
                         git config user.name "Nguyen Anh Duc"
-                        sed -i "s/image:.*:/image: aducng091103\/ultimate-cicd:${newTag}/g" ${deploymentFile}
+                        sed -i "s/image:.*:/image: aducng091103/ultimate-cicd:${newTag}/g" ${deploymentFile}
                         git add ${deploymentFile}
                         git commit -m "Update deployment image to version ${newTag}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
