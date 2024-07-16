@@ -6,6 +6,16 @@ pipeline {
     }
   }
   stages {
+    stage('Fix Permissions') {
+            steps {
+                sh '''
+                GIT_DIR=$(git rev-parse --show-toplevel)
+                sudo chown -R root:root "$GIT_DIR/.git"
+                sudo find "$GIT_DIR/.git" -type d -exec chmod 775 {} +
+                sudo find "$GIT_DIR/.git" -type f -exec chmod 664 {} +
+                '''
+            }
+    }
     stage('Checkout') {
       steps {
         cleanWs()
